@@ -8,9 +8,9 @@ interface IComment {
     body: string
 }
 
-// type CommentEmail = Pick<IComment, 'id' | 'email'>
+type CommentEmail = Pick<IComment, 'id' | 'email'>
 
-const getData = async (url: string): Promise<IComment[]> => {
+const getData = async (url: string): Promise<CommentEmail[]> => {
     const res = await fetch(url)
 
     return await res.json()
@@ -19,5 +19,7 @@ const getData = async (url: string): Promise<IComment[]> => {
 getData(COMMENTS_URL)
     .then(data => {
         // Your code here...
-        console.log(data)
+        data.forEach(item=>{
+            console.log(`ID: ${item.id}, Email:${item.email}`)
+        })
     });
